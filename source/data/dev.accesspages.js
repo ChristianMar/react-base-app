@@ -1,1 +1,3 @@
-module.exports = {};
+module.exports = {
+  APP_NAME: "React",
+};
