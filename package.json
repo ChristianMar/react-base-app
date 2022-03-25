@@ -1,0 +1,53 @@
+{
+  "name": "upgraded",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "--- INSTALL ---": "install all dependency with yarn install-all-dependency",
+    "remove-root-node-modules": "rm -rf ./node_modules || true",
+    "remove-webapp-node-modules": "rm -rf ./source/app/webapp/node_modules || true",
+    "remove-main-node-modules": "rm -rf ./source/app/main/node_modules || true",
+    "remove-ui-node-modules": "rm -rf ./source/app/ui/node_modules || true",
+    "remove-all-node-modules": "yarn remove-root-node-modules && yarn remove-webapp-node-modules && yarn remove-main-node-modules && yarn remove-ui-node-modules",
+    "install-root-node-modules": "yarn",
+    "install-webapp-node-modules": "cd ./source/app/webapp/ && yarn",
+    "install-main-node-modules": "cd ./source/app/main/ && yarn",
+    "install-ui-node-modules": "cd ./source/app/ui/ && yarn",
+    "cleanup": "yarn remove-all-node-modules && yarn install-root-node-modules && yarn install-webapp-node-modules && yarn install-main-node-modules && yarn install-ui-node-modules",
+    "--- RUN DEV ---": "run dev app with yarn electron-dev",
+    "start-dev": "webpack-dev-server --config ./source/webpack/webpack.dev.js --mode development --env dev",
+    "start-dev-tools": "webpack-dev-server --config ./source/webpack/webpack.dev.js -d --mode development --env dev",
+    "--- FIX PROD FOLDER ---": "used by build",
+    "remove-build-folder": "rm -rf build || true",
+    "--- BUILD DEV ---": "build dev and release app",
+    "build-dev": "yarn remove-build-folder && webpack --config ./source/webpack/webpack.prod.js --mode production --env dev",
+    "--- BUILD UAT ---": "build uat and release app",
+    "build-uat": "yarn remove-build-folder && webpack --config ./source/webpack/webpack.prod.js --mode production --env uat",
+    "--- BUILD PROD ---": "build prod and release app",
+    "build-prod": "yarn remove-build-folder && webpack --config ./source/webpack/webpack.prod.js --mode production --env prod"
+  },
+  "resolutions": {
+    "**/ua-parser-js": "0.7.28"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.4",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "git-revision-webpack-plugin": "^5.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "6"
+  }
+}
