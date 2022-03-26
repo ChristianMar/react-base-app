@@ -1,25 +1,25 @@
 /*eslint-disable*/
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
-const common = require('./webpack.common.js');
-const createStage = require('./createStage.js');
-const path = require('path');
+const webpack = require("webpack");
+const { merge } = require("webpack-merge");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
+const common = require("./webpack.common.js");
+const createStage = require("./createStage.js");
+const path = require("path");
 
 module.exports = (env, options) => {
-  console.log('DEV', env, options);
+  console.log("DEV", env, options);
   const webpackConfig = common(env, options);
   const webappStageConfig = createStage(env, options);
-  const rootPath = path.join(__dirname, '..', '..');
+  const rootPath = path.join(__dirname, "..", "..");
 
   return merge(webpackConfig, {
-    entry: path.join(rootPath, 'source', 'app', 'webapp', 'src', 'index.js'),
-    mode: 'development',
-    devtool: 'inline-source-map',
+    entry: path.join(rootPath, "source", "app", "webapp", "src", "index.js"),
+    mode: "development",
+    devtool: "inline-source-map",
     devServer: {
       static: {
-        directory: path.join(rootPath, 'source', 'app', 'webapp', 'src'),
+        directory: path.join(rootPath, "source", "app", "webapp", "src"),
       },
       compress: true,
       port: 9000,
@@ -37,6 +37,9 @@ module.exports = (env, options) => {
       hot: false,
     },
     plugins: [
+      new webpack.ProvidePlugin({
+        process: "process/browser",
+      }),
       new webpack.EnvironmentPlugin(webappStageConfig),
       new GitRevisionPlugin(),
       new HtmlWebpackPlugin({
@@ -48,11 +51,11 @@ module.exports = (env, options) => {
         APP_NAME: webappStageConfig.APP_NAME,
         template: path.join(
           rootPath,
-          'source',
-          'app',
-          'webapp',
-          'src',
-          'index.html'
+          "source",
+          "app",
+          "webapp",
+          "src",
+          "index.html"
         ),
       }),
     ],

@@ -35,6 +35,9 @@ module.exports = (env, options) => {
       ],
     },
     plugins: [
+      new webpack.ProvidePlugin({
+        process: "process/browser",
+      }),
       new webpack.EnvironmentPlugin(webappStageConfig),
       new GitRevisionPlugin(),
       new HtmlWebpackPlugin({

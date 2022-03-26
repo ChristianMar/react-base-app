@@ -16,7 +16,6 @@
     "cleanup": "yarn remove-all-node-modules && yarn install-root-node-modules && yarn install-webapp-node-modules && yarn install-main-node-modules && yarn install-ui-node-modules",
     "--- RUN DEV ---": "run dev app with yarn electron-dev",
     "start-dev": "webpack-dev-server --config ./source/webpack/webpack.dev.js --mode development --env dev",
-    "start-dev-tools": "webpack-dev-server --config ./source/webpack/webpack.dev.js -d --mode development --env dev",
     "--- FIX PROD FOLDER ---": "used by build",
     "remove-build-folder": "rm -rf build || true",
     "--- BUILD DEV ---": "build dev and release app",
@@ -45,13 +44,21 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "final-form": "^4.20.6",
+    "node-polyglot": "^2.4.2",
+    "process": "^0.11.10",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-final-form": "^6.5.8",
+    "react-polyglot": "^0.7.2",
+    "react-redux": "^7.2.6",
     "react-router-dom": "6",
     "redux": "^4.1.2",
+    "redux-devtools": "^3.7.0",
+    "redux-devtools-dock-monitor": "^1.2.0",
+    "redux-devtools-log-monitor": "^2.1.0",
     "redux-thunk": "^2.4.1"
   }
 }

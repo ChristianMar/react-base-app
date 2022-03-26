@@ -1,20 +1,14 @@
-import 'regenerator-runtime/runtime';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { cacheEnhancer } from 'redux-cache';
+import "regenerator-runtime/runtime";
+import { createStore, applyMiddleware, combineReducers, compose } from "redux";
+import thunk from "redux-thunk";
 
-import { utils } from '@main';
-import { reducers as mainReducers } from '@main';
-import cacheMiddleware from '@main/middleware/cacheMiddleware';
-import requestExternalMiddleware from '@main/middleware/requestExternalMiddleware';
-import responseExternalMiddleware from '@main/middleware/responseExternalMiddleware';
-import requestPublicMiddleware from '@main/middleware/requestPublicMiddleware';
-import responsePublicMiddleware from '@main/middleware/responsePublicMiddleware';
-import requestAuthenticatedMiddleware from '@main/middleware/requestAuthenticatedMiddleware';
-import responseAuthenticatedMiddleware from '@main/middleware/responseAuthenticatedMiddleware';
-import requestRetryMiddleware from '@main/middleware/requestRetryMiddleware';
-import responseRetryMiddleware from '@main/middleware/responseRetryMiddleware';
-import DevTools from '@main/devTools/DevTools';
+import { utils } from "@main";
+import { reducers as mainReducers } from "@main";
+import requestPublicMiddleware from "@main/middleware/requestPublicMiddleware";
+import responsePublicMiddleware from "@main/middleware/responsePublicMiddleware";
+import requestAuthenticatedMiddleware from "@main/middleware/requestAuthenticatedMiddleware";
+import responseAuthenticatedMiddleware from "@main/middleware/responseAuthenticatedMiddleware";
+import DevTools from "@main/devTools/DevTools";
 
 // Usually you import the reducer from the monitor
 // or apply with createDevTools as explained in Redux DevTools
@@ -29,28 +23,23 @@ export default function createReduxStore(services) {
   // Create a logger instance
   let initialState = utils.getLocalStorageStore();
 
-  console.log('[REDUX] local storage store is:', initialState);
+  console.log("[REDUX] local storage store is:", initialState);
 
   // Create Redux store with middlewares
   let store;
-  if (process.env.DEV_TOOL) {
+  if (process.env.STAGE === "dev") {
     // add redux dev tools
     return createStore(
       reducer,
       initialState,
       compose(
         applyMiddleware(
-          cacheMiddleware,
-          requestExternalMiddleware,
           requestPublicMiddleware,
           requestAuthenticatedMiddleware,
           thunk.withExtraArgument(services),
-          responseExternalMiddleware,
           responsePublicMiddleware,
           responseAuthenticatedMiddleware,
-          utils.syncLocalStorageMiddleware,
-          requestRetryMiddleware,
-          responseRetryMiddleware
+          utils.syncLocalStorageMiddleware
         ),
         DevTools.instrument({
           maxAge: 15, // maximum allowed actions to be stored on the history tree
@@ -60,8 +49,7 @@ export default function createReduxStore(services) {
           shouldHotReload: true, // if set to false, will not recompute the states on hot reloading (or on replacing the reducers).
           trace: true, // if set to true, will include stack trace for every dispatched action.
           traceLimit: 15, // maximum stack trace frames to be stored (in case trace option was provided as true).
-        }),
-        cacheEnhancer()
+        })
       )
     );
   } else {
@@ -70,19 +58,13 @@ export default function createReduxStore(services) {
       initialState,
       compose(
         applyMiddleware(
-          cacheMiddleware,
-          requestExternalMiddleware,
           requestPublicMiddleware,
           requestAuthenticatedMiddleware,
           thunk.withExtraArgument(services),
-          responseExternalMiddleware,
           responsePublicMiddleware,
           responseAuthenticatedMiddleware,
-          requestRetryMiddleware,
-          responseRetryMiddleware,
           utils.syncLocalStorageMiddleware
-        ),
-        cacheEnhancer()
+        )
       )
     );
   }
