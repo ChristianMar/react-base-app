@@ -1,4 +1,4 @@
-import "regenerator-runtime/runtime";
+import 'regenerator-runtime/runtime';
 
 export default function responseAuthenticatedMiddleware({
   dispatch,
@@ -6,7 +6,7 @@ export default function responseAuthenticatedMiddleware({
 }) {
   return (next) => (action) => {
     if (action.authenticated) {
-      if (action.payload && typeof action.payload.then === "function") {
+      if (action.payload && typeof action.payload.then === 'function') {
         action.payload
           .then((res) => {
             return dispatch({

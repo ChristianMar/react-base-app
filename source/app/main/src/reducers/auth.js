@@ -1,4 +1,4 @@
-import { types } from "../actions/auth";
+import { types } from '../actions/auth';
 
 const initialState = {
   me: {

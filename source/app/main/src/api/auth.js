@@ -1,4 +1,4 @@
-import { AUTH_URLS as URL } from "./endpoints";
+import { AUTH_URLS as URL } from './endpoints';
 
 export const AnonymousLogout = (axios, data) => {
   // axios.get("", {});
@@ -14,7 +14,7 @@ export const Login = (axios, data) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
-        language: "it",
+        language: 'it',
       });
     }, 300);
   });

@@ -1,4 +1,4 @@
 module.exports = {
-  APP_NAME: "React",
-  PROJECT: "React",
+  APP_NAME: 'React',
+  PROJECT: 'React',
 };

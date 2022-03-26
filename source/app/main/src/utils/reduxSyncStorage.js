@@ -1,5 +1,5 @@
-const STORAGE_NAME = process.env.PROJECT + "_" + process.env.STORE_TIMESTAMP;
-const STORAGE_EMAIL = process.env.PROJECT + "_MAIL";
+const STORAGE_NAME = process.env.PROJECT + '_' + process.env.STORE_TIMESTAMP;
+const STORAGE_EMAIL = process.env.PROJECT + '_MAIL';
 
 const cleanUpLocalStorage = () => {
   let keys = Object.keys(localStorage);

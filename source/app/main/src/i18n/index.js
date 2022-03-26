@@ -1,2 +1,2 @@
-export { en } from "./en";
-export { it } from "./it";
+export { en } from './en';
+export { it } from './it';

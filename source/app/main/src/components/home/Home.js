@@ -1,10 +1,10 @@
-import React, { useEffect, Fragment } from "react";
-import { Form } from "react-final-form";
-import { useTranslate } from "react-polyglot";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, Fragment } from 'react';
+import { Form } from 'react-final-form';
+import { useTranslate } from 'react-polyglot';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { isRequired } from "../../utils/validationRules";
-import { HomeWidget } from "@ui";
+import { isRequired } from '../../utils/validationRules';
+import { HomeWidget } from '@ui';
 
 let Home = ({}) => {
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ let Home = ({}) => {
   return (
     <HomeWidget
       labels={{
-        welcome: t("home.welcome"),
-        logout: t("home.logout"),
+        welcome: t('home.welcome'),
+        logout: t('home.logout'),
       }}
       onLogout={onLogout}
     />

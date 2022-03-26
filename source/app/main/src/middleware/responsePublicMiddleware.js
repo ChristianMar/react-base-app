@@ -1,9 +1,9 @@
-import "regenerator-runtime/runtime";
+import 'regenerator-runtime/runtime';
 
 export default function responsePublicMiddleware({ dispatch, getState }) {
   return (next) => (action) => {
     if (action.public) {
-      if (action.payload && typeof action.payload.then === "function") {
+      if (action.payload && typeof action.payload.then === 'function') {
         action.payload
           .then((res) => {
             return dispatch({

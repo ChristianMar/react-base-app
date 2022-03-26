@@ -1,14 +1,14 @@
-import "regenerator-runtime/runtime";
-import { createStore, applyMiddleware, combineReducers, compose } from "redux";
-import thunk from "redux-thunk";
+import 'regenerator-runtime/runtime';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import thunk from 'redux-thunk';
 
-import { utils } from "@main";
-import { reducers as mainReducers } from "@main";
-import requestPublicMiddleware from "@main/middleware/requestPublicMiddleware";
-import responsePublicMiddleware from "@main/middleware/responsePublicMiddleware";
-import requestAuthenticatedMiddleware from "@main/middleware/requestAuthenticatedMiddleware";
-import responseAuthenticatedMiddleware from "@main/middleware/responseAuthenticatedMiddleware";
-import DevTools from "@main/devTools/DevTools";
+import { utils } from '@main';
+import { reducers as mainReducers } from '@main';
+import requestPublicMiddleware from '@main/middleware/requestPublicMiddleware';
+import responsePublicMiddleware from '@main/middleware/responsePublicMiddleware';
+import requestAuthenticatedMiddleware from '@main/middleware/requestAuthenticatedMiddleware';
+import responseAuthenticatedMiddleware from '@main/middleware/responseAuthenticatedMiddleware';
+import DevTools from '@main/devTools/DevTools';
 
 // Usually you import the reducer from the monitor
 // or apply with createDevTools as explained in Redux DevTools
@@ -23,11 +23,11 @@ export default function createReduxStore(services) {
   // Create a logger instance
   let initialState = utils.getLocalStorageStore();
 
-  console.log("[REDUX] local storage store is:", initialState);
+  console.log('[REDUX] local storage store is:', initialState);
 
   // Create Redux store with middlewares
   let store;
-  if (process.env.STAGE === "dev") {
+  if (process.env.STAGE === 'dev') {
     // add redux dev tools
     return createStore(
       reducer,

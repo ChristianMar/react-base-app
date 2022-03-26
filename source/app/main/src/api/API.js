@@ -1,7 +1,7 @@
-import axios from "axios";
-import partial from "lodash/partial";
+import axios from 'axios';
+import partial from 'lodash/partial';
 
-import * as authMethods from "./auth";
+import * as authMethods from './auth';
 
 export class API {
   store;
@@ -16,8 +16,8 @@ export class API {
   }
 
   getConfig = () => {
-    if (!this.store || typeof this.store.getState !== "function")
-      throw "No Redux Store found. You have to set a store with .setReduxStore() for the API to work properly.";
+    if (!this.store || typeof this.store.getState !== 'function')
+      throw 'No Redux Store found. You have to set a store with .setReduxStore() for the API to work properly.';
     let authState = this.store.getState().auth;
     let serverTime = this.store.getState().config.offsetServerTime;
     return {
@@ -65,9 +65,9 @@ export class API {
 
   anonymousAxiosInterceptor = (interceptorConfig) => {
     return (axiosConfig) => {
-      let contentType = "application/json";
+      let contentType = 'application/json';
       let headers = {
-        "Content-Type": contentType,
+        'Content-Type': contentType,
         ...axiosConfig.headers,
       };
 
@@ -75,8 +75,8 @@ export class API {
         headers: headers,
         method: axiosConfig.method,
         url: axiosConfig.url,
-        data: JSON.stringify(axiosConfig.data) || "{}",
-        params: axiosConfig.params || "",
+        data: JSON.stringify(axiosConfig.data) || '{}',
+        params: axiosConfig.params || '',
         paramsSerializer: (params) => {
           return qs.stringify(params, { indices: false });
         },

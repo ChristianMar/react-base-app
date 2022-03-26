@@ -1,7 +1,7 @@
 import {
   syncLocalStorageMiddleware,
   getLocalStorageStore,
-} from "./reduxSyncStorage";
+} from './reduxSyncStorage';
 
 export const utils = {
   syncLocalStorageMiddleware,

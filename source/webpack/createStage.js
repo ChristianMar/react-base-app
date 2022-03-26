@@ -1,17 +1,17 @@
-const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
-var path = require("path");
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
+var path = require('path');
 
 module.exports = (env, options) => {
-  process.env.STAGE = env.dev === true ? "dev" : "prod";
+  process.env.STAGE = env.dev === true ? 'dev' : 'prod';
   var gitRevisionPlugin = new GitRevisionPlugin();
-  var rootPath = path.join(__dirname, "..");
+  var rootPath = path.join(__dirname, '..');
 
   var webappStageConfig = require(path.join(
     rootPath,
-    "data",
-    process.env.STAGE + ".accesspages"
+    'data',
+    process.env.STAGE + '.accesspages'
   ));
-  var webappConfig = require(path.join(rootPath, "data", "config.webapp"));
+  var webappConfig = require(path.join(rootPath, 'data', 'config.webapp'));
 
   var config = {
     STAGE: process.env.STAGE,
@@ -24,7 +24,7 @@ module.exports = (env, options) => {
 
   Object.assign(config, webappStageConfig, webappConfig);
 
-  console.log("webappStageConfig", config);
+  console.log('webappStageConfig', config);
 
   return config;
 };
