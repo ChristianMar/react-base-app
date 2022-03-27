@@ -6,7 +6,6 @@ export const it = {
     },
   },
   login: {
-    title: 'Login',
     username: 'Username',
     password: 'Password',
     login: 'Login',

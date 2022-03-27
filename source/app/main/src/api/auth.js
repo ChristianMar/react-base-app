@@ -1,6 +1,6 @@
 import { AUTH_URLS as URL } from './endpoints';
 
-export const AnonymousLogout = (axios, data) => {
+export const Logout = (axios, data) => {
   // axios.get("", {});
   return new Promise((resolve, reject) => {
     setTimeout(() => {

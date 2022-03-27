@@ -1,22 +1,20 @@
-import React, { useEffect, Fragment } from 'react';
-import { Form } from 'react-final-form';
+import React, { useEffect, useContext } from 'react';
 import { useTranslate } from 'react-polyglot';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { isRequired } from '../../utils/validationRules';
+import { authPristine } from '../../actions/auth';
+import UserContext from '../../context/UserContext';
 import { HomeWidget } from '@ui';
 
 let Home = ({}) => {
+  const userContext = useContext(UserContext);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const t = useTranslate();
 
   useEffect(() => {
-    if (auth.me.loading === false && auth.me.error !== null) {
-    }
-  }, [auth.me.loading]);
-
-  const onLogout = (data) => {};
+    dispatch(authPristine());
+  }, []);
 
   return (
     <HomeWidget
@@ -24,7 +22,9 @@ let Home = ({}) => {
         welcome: t('home.welcome'),
         logout: t('home.logout'),
       }}
-      onLogout={onLogout}
+      onLogout={userContext.onLogout}
+      loading={auth.logout.loading}
+      error={auth.logout.error}
     />
   );
 };

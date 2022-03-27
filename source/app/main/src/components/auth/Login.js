@@ -3,7 +3,7 @@ import { Form } from 'react-final-form';
 import { useTranslate } from 'react-polyglot';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { authLogin } from '../../actions/auth';
+import { authPristine, authLogin } from '../../actions/auth';
 import { isRequired } from '../../utils/validationRules';
 import { LoginWidget } from '@ui';
 
@@ -13,11 +13,11 @@ let Login = ({}) => {
   const t = useTranslate();
 
   useEffect(() => {
-    if (auth.me.loading === false && auth.me.error !== null) {
-    }
-  }, [auth.me.loading]);
+    dispatch(authPristine());
+  }, []);
 
   const onLogin = (data) => {
+    dispatch(authPristine());
     dispatch(authLogin(data));
   };
 
@@ -32,11 +32,11 @@ let Login = ({}) => {
         validate={(values) => {
           const errors = {};
           errors['username'] = isRequired(
-            t('validation.errors.required', { field: 'Username' }),
+            t('validation.errors.required', { field: t('login.username') }),
             values['username']
           );
           errors['password'] = isRequired(
-            t('validation.errors.required', { field: 'Password' }),
+            t('validation.errors.required', { field: t('login.password') }),
             values['password']
           );
           return errors;
@@ -45,10 +45,9 @@ let Login = ({}) => {
           <form onSubmit={handleSubmit}>
             <LoginWidget
               labels={{
-                title: t('loginModal.title'),
-                username: t('loginModal.username'),
-                password: t('loginModal.password'),
-                login: t('loginModal.login'),
+                username: t('login.username'),
+                password: t('login.password'),
+                login: t('login.login'),
               }}
               onLogin={handleSubmit}
               loading={auth.me.loading}

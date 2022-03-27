@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { I18n } from 'react-polyglot';
 import { useSelector } from 'react-redux';
+import { Routes, Route, Link } from 'react-router-dom';
 
 import { en, it } from '../i18n';
 import DevTools from '../devTools/DevTools';
 import LanguageContext from '../context/LanguageContext';
+import { UserContextProvider } from '../context/UserContext';
 import { AppLayout as AppLayoutUI } from '@ui';
+import Login from '../components/auth/Login';
+import Home from '../components/home/Home';
 
 const languages = {
   it: it,
@@ -45,14 +49,21 @@ const AppLayout = ({}) => {
   return (
     <AppLayoutUI>
       <I18n locale={language} messages={messages}>
-        <LanguageContext.Provider
-          value={{
-            language: language,
-          }}
-        >
-          {process.env.STAGE === 'dev' ? <DevTools /> : null}
-          WELCOME
-        </LanguageContext.Provider>
+        <UserContextProvider>
+          <LanguageContext.Provider
+            value={{
+              language: language,
+            }}
+          >
+            {process.env.STAGE === 'dev' ? <DevTools /> : null}
+            <Routes>
+              <Route path="/">
+                <Route path="login" element={<Login />} />
+                <Route path="app" element={<Home />} />
+              </Route>
+            </Routes>
+          </LanguageContext.Provider>
+        </UserContextProvider>
       </I18n>
     </AppLayoutUI>
   );

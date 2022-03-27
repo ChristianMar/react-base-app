@@ -33,7 +33,7 @@ export const authLogout = (data) => {
     });
     return dispatch({
       type: types.RESET_STATE,
-      call: API.logout.Logout,
+      call: API.auth.Logout,
       params: data,
       success: types.RESET_STATE_SUCCESS,
       error: types.RESET_STATE_SUCCESS, // also go with success
