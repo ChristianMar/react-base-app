@@ -20,6 +20,8 @@ export const LoginWidget = ({ labels, onLogin, loading, error }) => {
         label={labels.username}
         fullWidth={true}
         disabled={loading}
+        variant="standard"
+        size="small"
       />
       <Field
         name="password"
@@ -28,6 +30,8 @@ export const LoginWidget = ({ labels, onLogin, loading, error }) => {
         fullWidth={true}
         disabled={loading}
         type="password"
+        variant="standard"
+        size="small"
       />
       <Button
         type="submit"

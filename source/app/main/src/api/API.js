@@ -19,10 +19,8 @@ export class API {
     if (!this.store || typeof this.store.getState !== 'function')
       throw 'No Redux Store found. You have to set a store with .setReduxStore() for the API to work properly.';
     let authState = this.store.getState().auth;
-    let serverTime = this.store.getState().config.offsetServerTime;
     return {
       auth: authState || {},
-      serverTime: serverTime,
     };
   };
 

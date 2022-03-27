@@ -26,15 +26,16 @@ const AppLayout = ({}) => {
       if (!navigator) return;
       if (navigator.languages[0] !== 'it' && navigator.languages[0] !== 'en')
         return;
-      setLanguage(navigator.languages[0]);
-      setMessages(navigator.languages[0]);
+      let lang = navigator.languages[0];
+      setLanguage(lang);
+      setMessages(languages[lang]);
     } else {
-      setLanguage(
-        auth.me.payload.language !== 'en' || auth.me.payload.language !== 'it'
+      let lang =
+        auth.me.payload.language !== 'en' && auth.me.payload.language !== 'it'
           ? 'en'
-          : auth.me.payload.language
-      );
-      setMessages(languages[language]);
+          : auth.me.payload.language;
+      setLanguage(lang);
+      setMessages(languages[lang]);
     }
   };
 
