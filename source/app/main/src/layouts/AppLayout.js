@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { en, it } from '../i18n';
 import DevTools from '../devTools/DevTools';
 import LanguageContext from '../context/LanguageContext';
+import { AppLayout as AppLayoutUI } from '@ui';
 
 const languages = {
   it: it,
@@ -39,10 +40,10 @@ const AppLayout = ({}) => {
 
   useEffect(() => {
     getLanguage();
-  }, [auth.me.payload.language]);
+  }, [auth.me.payload.token]);
 
   return (
-    <React.Fragment>
+    <AppLayoutUI>
       <I18n locale={language} messages={messages}>
         <LanguageContext.Provider
           value={{
@@ -53,7 +54,7 @@ const AppLayout = ({}) => {
           WELCOME
         </LanguageContext.Provider>
       </I18n>
-    </React.Fragment>
+    </AppLayoutUI>
   );
 };
 

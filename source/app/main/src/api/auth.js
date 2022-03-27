@@ -15,6 +15,7 @@ export const Login = (axios, data) => {
     setTimeout(() => {
       resolve({
         language: 'it',
+        token: 'aaaaa',
       });
     }, 300);
   });

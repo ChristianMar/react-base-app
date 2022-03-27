@@ -37,9 +37,6 @@ module.exports = (env, options) => {
             },
             {
               loader: 'sass-loader',
-              options: {
-                prependData: `$fontName: ${webappStageConfig.FONT_NAME};$backgroundColor: ${webappStageConfig.COLOR_BACKGROUND};`,
-              },
             },
           ],
         },
