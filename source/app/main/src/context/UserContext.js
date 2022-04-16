@@ -21,7 +21,7 @@ export const UserContextProvider = ({ children }) => {
     if (!auth.me.payload.token) {
       navigate('login');
     } else {
-      navigate('app');
+      navigate('app/index');
     }
   };
 

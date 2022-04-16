@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { I18n } from 'react-polyglot';
 import { useSelector } from 'react-redux';
 import { Routes, Route, Link } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { en, it } from '../i18n';
 import DevTools from '../devTools/DevTools';
@@ -9,7 +10,8 @@ import LanguageContext from '../context/LanguageContext';
 import { UserContextProvider } from '../context/UserContext';
 import { AppLayout as AppLayoutUI } from '@ui';
 import Login from '../components/auth/Login';
-import Home from '../components/home/Home';
+import LoggedLayout from './LoggedLayout';
+import ErrorHandler from './ErrorHandler';
 
 const languages = {
   it: it,
@@ -20,6 +22,7 @@ const AppLayout = ({}) => {
   const auth = useSelector((state) => state.auth);
   const [language, setLanguage] = useState('en');
   const [messages, setMessages] = useState(en);
+  const [error, setError] = useState(false);
 
   const getLanguage = () => {
     if (!auth.me.payload) {
@@ -56,13 +59,19 @@ const AppLayout = ({}) => {
               language: language,
             }}
           >
-            {process.env.STAGE === 'dev' ? <DevTools /> : null}
-            <Routes>
-              <Route path="/">
-                <Route path="login" element={<Login />} />
-                <Route path="app" element={<Home />} />
-              </Route>
-            </Routes>
+            <ErrorBoundary
+              FallbackComponent={ErrorHandler}
+              onReset={() => setError(false)}
+              resetKeys={[error]}
+            >
+              {process.env.STAGE === 'dev' ? <DevTools /> : null}
+              <Routes>
+                <Route path="/">
+                  <Route path="login" element={<Login />} />
+                  <Route path="app/*" element={<LoggedLayout />} />
+                </Route>
+              </Routes>
+            </ErrorBoundary>
           </LanguageContext.Provider>
         </UserContextProvider>
       </I18n>

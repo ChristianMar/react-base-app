@@ -14,4 +14,8 @@ export const en = {
     welcome: 'Welcome',
     logout: 'Logout',
   },
+  errorBoundary: {
+    error: 'An error occurred',
+    goHome: 'Return to home',
+  },
 };
