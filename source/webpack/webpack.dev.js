@@ -28,7 +28,7 @@ module.exports = (env, options) => {
       // watchContentBase: true,
       // compress: true,
       // public: 'console.local.com:8080',
-      // https: true,
+      https: true,
       // disableHostCheck: true,
       // historyApiFallback: true,
       // inline: true,
